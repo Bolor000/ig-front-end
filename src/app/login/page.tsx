@@ -16,7 +16,7 @@ const Page = () => {
 
   const login = async () => {
     try {
-      const responce = await fetch("http://localhost:1212/users/login", {
+      const responce = await fetch("https://ig-back-end-rgcc.onrender.com/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

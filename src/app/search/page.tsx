@@ -16,7 +16,7 @@ export default function SearchPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:1212/users/search", {
+      const res = await fetch("https://ig-back-end-rgcc.onrender.com/users/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

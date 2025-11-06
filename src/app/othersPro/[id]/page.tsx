@@ -2,10 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useUser } from "@/providers/AuthProvider";
-import { HOME } from "@/icons/home";
-import { POSTNEW } from "@/icons/POSTNEW";
-import { PROFILE } from "@/icons/profile";
-import { SEARCH } from "@/icons/search";
 import { useRouter, useParams } from "next/navigation";
 
 export default function ProfilePage() {
@@ -20,7 +16,7 @@ export default function ProfilePage() {
 
     try {
       const res = await fetch(
-        `http://localhost:1212/users/profile-others/${id}`,
+        `https://ig-back-end-rgcc.onrender.com/users/profile-others/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

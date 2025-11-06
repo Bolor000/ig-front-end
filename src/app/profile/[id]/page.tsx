@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/providers/AuthProvider";
 import { HOME } from "@/icons/home";
-import { POSTNEW } from "@/icons/POSTNEW";
+import { New } from "@/icons/new";
 import { PROFILE } from "@/icons/profile";
 import { SEARCH } from "@/icons/search";
 import { useRouter } from "next/navigation";
@@ -32,7 +32,7 @@ export default function ProfilePage() {
 
     try {
       const res = await fetch(
-        `http://localhost:1212/users/profile/${user._id}`,
+        `https://ig-back-end-rgcc.onrender.com/users/profile/${user._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -119,35 +119,35 @@ export default function ProfilePage() {
       </div>
 
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t flex items-center justify-around p-2">
-  <button className="flex flex-col items-center text-gray-700 hover:text-black">
-    <HOME />
-    <div className="text-xs">Home</div>
-  </button>
+        <button className="flex flex-col items-center text-gray-700 hover:text-black">
+          <HOME />
+          <div className="text-xs">Home</div>
+        </button>
 
-  <button
-    onClick={() => router.push("/newPost")}
-    className="flex flex-col items-center text-gray-700 hover:text-black"
-  >
-    <POSTNEW />
-    <span className="text-xs">Post</span>
-  </button>
+        <button
+          onClick={() => router.push("/newPost")}
+          className="flex flex-col items-center text-gray-700 hover:text-black"
+        >
+          <New />
+          <span className="text-xs">Post</span>
+        </button>
 
-  <button
-    onClick={() => router.push("/search")}
-    className="flex flex-col items-center text-gray-700 hover:text-black"
-  >
-    <SEARCH />
-    <span className="text-xs">Search</span>
-  </button>
+        <button
+          onClick={() => router.push("/search")}
+          className="flex flex-col items-center text-gray-700 hover:text-black"
+        >
+          <SEARCH />
+          <span className="text-xs">Search</span>
+        </button>
 
-  <button
-    onClick={() => router.push(`/profile/${user?._id}`)}
-    className="flex flex-col items-center text-gray-700 hover:text-black"
-  >
-    <PROFILE />
-    <span className="text-xs">Profile</span>
-  </button>
-</div>
+        <button
+          onClick={() => router.push(`/profile/${user?._id}`)}
+          className="flex flex-col items-center text-gray-700 hover:text-black"
+        >
+          <PROFILE />
+          <span className="text-xs">Profile</span>
+        </button>
+      </div>
     </div>
   );
 }

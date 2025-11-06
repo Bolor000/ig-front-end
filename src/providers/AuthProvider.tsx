@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const response = await fetch("http://localhost:1212/login", {
+    const response = await fetch("https://ig-back-end-rgcc.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   const signUp = async (email: string, password: string, username: string) => {
-    const response = await fetch("http://localhost:1212/sign-up", {
+    const response = await fetch("https://ig-back-end-rgcc.onrender.com/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, username }),

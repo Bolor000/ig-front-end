@@ -2,16 +2,16 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useUser } from "@/providers/AuthProvider"; 
+import { useUser } from "@/providers/AuthProvider";
 import { HOME } from "@/icons/home";
-import { POSTNEW } from "@/icons/POSTNEW";
+import { New } from "@/icons/new";
 import { PROFILE } from "@/icons/profile";
 import { SEARCH } from "@/icons/search";
 
 export default function CommentsPage() {
   const { token, user } = useUser();
   const router = useRouter();
-  const { postId } = useParams(); 
+  const { postId } = useParams();
   const [comments, setComments] = useState<any[]>([]);
   const [newComment, setNewComment] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -20,11 +20,20 @@ export default function CommentsPage() {
 
   const fetchComments = async () => {
     try {
-      const res = await fetch(`http://localhost:1212/comments/get/${postId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `https://ig-back-end-rgcc.onrender.com/comments/get/${postId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       const data = await res.json();
-      setComments(Array.isArray(data) ? data : Array.isArray(data.comments) ? data.comments : []);
+      setComments(
+        Array.isArray(data)
+          ? data
+          : Array.isArray(data.comments)
+          ? data.comments
+          : []
+      );
     } catch (err) {
       console.error(err);
       setComments([]);
@@ -38,14 +47,17 @@ export default function CommentsPage() {
   const handleAddComment = async () => {
     if (!newComment.trim()) return;
     try {
-      const res = await fetch(`http://localhost:1212/comments/comment`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ postId, comment: newComment }),
-      });
+      const res = await fetch(
+        `https://ig-back-end-rgcc.onrender.com/comments/comment`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ postId, comment: newComment }),
+        }
+      );
       setNewComment("");
       await fetchComments();
     } catch (err) {
@@ -55,7 +67,7 @@ export default function CommentsPage() {
 
   const handleDelete = async (id: string) => {
     try {
-      await fetch(`http://localhost:1212/comments/${id}`, {
+      await fetch(`https://ig-back-end-rgcc.onrender.com/comments/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -69,14 +81,17 @@ export default function CommentsPage() {
     if (!editingText.trim()) return;
 
     try {
-      const res = await fetch(`http://localhost:1212/comments/${id}`, {
-        method: "PUT",
-        headers: { 
-          "Content-Type": "application/json", 
-          Authorization: `Bearer ${token}` 
-        },
-        body: JSON.stringify({ comment: editingText }),
-      });
+      const res = await fetch(
+        `https://ig-back-end-rgcc.onrender.com/comments/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ comment: editingText }),
+        }
+      );
 
       if (!res.ok) {
         const data = await res.json();
@@ -99,7 +114,9 @@ export default function CommentsPage() {
   return (
     <div className="bg-white min-h-screen flex flex-col">
       <div className="flex items-center p-4 border-b">
-        <button onClick={() => router.back()} className="mr-4">&lt;</button>
+        <button onClick={() => router.back()} className="mr-4">
+          &lt;
+        </button>
         <h1 className="font-semibold text-lg">Comments</h1>
       </div>
 
@@ -115,14 +132,18 @@ export default function CommentsPage() {
               />
               <div className="flex-1">
                 <div className="flex justify-between items-center">
-                  <div className="font-semibold">{c.user?.username || "Anonymous"}</div>
+                  <div className="font-semibold">
+                    {c.user?.username || "Anonymous"}
+                  </div>
 
                   {c.user?._id === user?._id && (
                     <div className="relative">
                       <button
                         className="text-gray-400 font-bold px-2"
                         onClick={() =>
-                          setShowDropdownId(showDropdownId === c._id ? null : c._id)
+                          setShowDropdownId(
+                            showDropdownId === c._id ? null : c._id
+                          )
                         }
                       >
                         …
@@ -187,7 +208,8 @@ export default function CommentsPage() {
         />
         <button
           onClick={handleAddComment}
-          className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-full hover:bg-blue-600">
+          className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-full hover:bg-blue-600"
+        >
           Send
         </button>
       </div>
@@ -197,15 +219,24 @@ export default function CommentsPage() {
           <HOME />
           <div className="text-xs">Home</div>
         </button>
-        <button onClick={() => router.push("/newPost")} className="flex flex-col items-center text-gray-700 hover:text-black">
-          <POSTNEW />
+        <button
+          onClick={() => router.push("/newPost")}
+          className="flex flex-col items-center text-gray-700 hover:text-black"
+        >
+          <New />
           <div className="text-xs">Post</div>
         </button>
-        <button onClick={() => router.push("/search")} className="flex flex-col items-center text-gray-700 hover:text-black">
+        <button
+          onClick={() => router.push("/search")}
+          className="flex flex-col items-center text-gray-700 hover:text-black"
+        >
           <SEARCH />
           <div className="text-xs">Search</div>
         </button>
-        <button onClick={() => router.push("/profile")} className="flex flex-col items-center text-gray-700 hover:text-black">
+        <button
+          onClick={() => router.push("/profile")}
+          className="flex flex-col items-center text-gray-700 hover:text-black"
+        >
           <PROFILE />
           <div className="text-xs">Profile</div>
         </button>

@@ -27,7 +27,7 @@ const HuggingFaceImageGenerator = () => {
           return;
         }
 
-        const res = await fetch(`http://localhost:1212/users/profile/${user._id}`, {
+        const res = await fetch(`https://ig-back-end-rgcc.onrender.com/users/profile/${user._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -93,7 +93,7 @@ const HuggingFaceImageGenerator = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:1212/posts/create", {
+      const response = await fetch("https://ig-back-end-rgcc.onrender.com/posts/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -137,7 +137,7 @@ const HuggingFaceImageGenerator = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:1212/users/profilePicture`, {
+      const response = await fetch(`https://ig-back-end-rgcc.onrender.com/users/profilePicture`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

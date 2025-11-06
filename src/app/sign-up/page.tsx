@@ -16,7 +16,7 @@ const Page = () => {
 
   const handleSignUp = async () => {
     try {
-      const response = await fetch("http://localhost:1212/users/sign-up", {
+      const response = await fetch("https://ig-back-end-rgcc.onrender.com/users/sign-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
