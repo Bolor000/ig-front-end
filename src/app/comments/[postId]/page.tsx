@@ -112,7 +112,7 @@ export default function CommentsPage() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex flex-col">
+    <div className="max-w-md mx-auto font-sans bg-white min-h-screen">
       <div className="flex items-center p-4 border-b">
         <button onClick={() => router.back()} className="mr-4">
           &lt;
@@ -197,7 +197,7 @@ export default function CommentsPage() {
         )}
       </div>
 
-      <div className="fixed bottom-16 left-0 w-full bg-white border-t p-3 flex items-center">
+      <div className="fixed bottom-16 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t p-3 flex items-center">
         <input
           type="text"
           placeholder="Add a comment..."
@@ -214,31 +214,34 @@ export default function CommentsPage() {
         </button>
       </div>
 
-      <div className="fixed bottom-0 w-full bg-white border-t flex justify-around items-center p-2">
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t flex items-center justify-around p-2">
         <button className="flex flex-col items-center text-gray-700 hover:text-black">
           <HOME />
           <div className="text-xs">Home</div>
         </button>
+
         <button
           onClick={() => router.push("/newPost")}
           className="flex flex-col items-center text-gray-700 hover:text-black"
         >
           <New />
-          <div className="text-xs">Post</div>
+          <span className="text-xs">Post</span>
         </button>
+
         <button
           onClick={() => router.push("/search")}
           className="flex flex-col items-center text-gray-700 hover:text-black"
         >
           <SEARCH />
-          <div className="text-xs">Search</div>
+          <span className="text-xs">Search</span>
         </button>
+
         <button
-          onClick={() => router.push("/profile")}
+          onClick={() => router.push(`/profile/${user?._id}`)}
           className="flex flex-col items-center text-gray-700 hover:text-black"
         >
           <PROFILE />
-          <div className="text-xs">Profile</div>
+          <span className="text-xs">Profile</span>
         </button>
       </div>
     </div>

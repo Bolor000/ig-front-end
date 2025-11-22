@@ -71,7 +71,7 @@ export default function Home() {
       toast.success("Follow status updated");
       fetchPosts();
     } else {
-      toast.error("Failed to update follow status");
+      toast.error("You cannot follow yourself");
     }
   };
 

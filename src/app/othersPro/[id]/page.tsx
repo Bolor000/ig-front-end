@@ -3,9 +3,13 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@/providers/AuthProvider";
 import { useRouter, useParams } from "next/navigation";
+import { HOME } from "@/icons/home";
+import { New } from "@/icons/new";
+import { PROFILE } from "@/icons/profile";
+import { SEARCH } from "@/icons/search";
 
 export default function ProfilePage() {
-  const { token } = useUser();
+  const { token, user } = useUser();
   const router = useRouter();
   const { id } = useParams();   
   const [profile, setProfile] = useState<any>(null);
@@ -90,6 +94,37 @@ export default function ProfilePage() {
           </p>
         )}
       </div>
+
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t flex items-center justify-around p-2">
+              <button className="flex flex-col items-center text-gray-700 hover:text-black">
+                <HOME />
+                <div className="text-xs">Home</div>
+              </button>
+      
+              <button
+                onClick={() => router.push("/newPost")}
+                className="flex flex-col items-center text-gray-700 hover:text-black"
+              >
+                <New />
+                <span className="text-xs">Post</span>
+              </button>
+      
+              <button
+                onClick={() => router.push("/search")}
+                className="flex flex-col items-center text-gray-700 hover:text-black"
+              >
+                <SEARCH />
+                <span className="text-xs">Search</span>
+              </button>
+      
+              <button
+                onClick={() => router.push(`/profile/${user?._id}`)}
+                className="flex flex-col items-center text-gray-700 hover:text-black"
+              >
+                <PROFILE />
+                <span className="text-xs">Profile</span>
+              </button>
+            </div>
     </div>
   );
 }
